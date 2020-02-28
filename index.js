@@ -43,6 +43,7 @@ function _enumerationCallback(uid, connectedUid, position, hardwareVersion, firm
 }
 
 async function _getAllDevices() {
+    initialize();
     var devices = await deviceManager.getAllDevices();
     return devices;
 }
