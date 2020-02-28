@@ -51,5 +51,5 @@ export { initialize, deviceManager }
 window.tf = {} 
 window.tf.initialize = initialize;
 window.tf.deviceManager = deviceManager;
-window.tf.devices = await _getAllDevices();
+window.tf.devices = _getAllDevices();
 
