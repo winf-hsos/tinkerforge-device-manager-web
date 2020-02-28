@@ -48,4 +48,6 @@ var getAllDevices = deviceManager.getAllDevices;
 
 export { initialize, setConnectCallback, getDeviceByUid, getDeviceByIdentifier, getAllDevices }
 
-window.initialize = initialize;
+window.tf = {} 
+window.tf.initialize = initialize;
+window.tf.deviceManager = deviceManager;
