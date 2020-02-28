@@ -42,12 +42,14 @@ function _enumerationCallback(uid, connectedUid, position, hardwareVersion, firm
     }
 }
 
-var getDeviceByUid = deviceManager.getDeviceByUid;
-var getDeviceByIdentifier = deviceManager.getDeviceByIdentifier;
-var getAllDevices = deviceManager.getAllDevices;
+async function _getAllDevices() {
+    return await deviceManager.getAllDevices();
+}
 
-export { initialize, setConnectCallback, getDeviceByUid, getDeviceByIdentifier, getAllDevices }
+export { initialize, deviceManager }
 
 window.tf = {} 
 window.tf.initialize = initialize;
 window.tf.deviceManager = deviceManager;
+window.tf.devices = await _getAllDevices();
+
