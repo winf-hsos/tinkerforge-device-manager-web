@@ -47,3 +47,5 @@ var getDeviceByIdentifier = deviceManager.getDeviceByIdentifier;
 var getAllDevices = deviceManager.getAllDevices;
 
 export { initialize, setConnectCallback, getDeviceByUid, getDeviceByIdentifier, getAllDevices }
+
+window.initialize = initialize;
