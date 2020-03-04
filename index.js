@@ -53,5 +53,6 @@ export { initialize, deviceManager }
 window.tf = {} 
 window.tf.initialize = initialize;
 window.tf.deviceManager = deviceManager;
+window.tf.setConnectCallback = setConnectCallback;
 //window.tf.devices = _getAllDevices();
 
