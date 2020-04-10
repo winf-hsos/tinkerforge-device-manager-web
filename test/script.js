@@ -1,15 +1,20 @@
 import * as dm from '../index.js';
 
-var nfc;
+var light;
 
 async function run() {
     var devices = await tf.initDevices();
     console.dir(devices);
 
-    nfc = devices.getDeviceByIdentifier(286);
-    console.dir(nfc);
+    light = devices.getDeviceByIdentifier(250);
+    light.registerListener(lightChanged);
+    
+}
 
-    nfc.scan(nfcRead, errorHandler);
+function lightChanged(val) {
+    let sensorValue = val.getValue("y");
+
+    console.dir(sensorValue);
 }
 
 function nfcRead(val) {

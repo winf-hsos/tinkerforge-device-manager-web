@@ -3,6 +3,7 @@ import { deviceManager } from './lib/deviceManager.js';
 var connectCallback;
 var ipcon;
 
+/* For getting devices via callback function */
 function initialize(host = "localhost", port = 4280) {
     console.log("Waiting for devices to connect...");
 
@@ -42,12 +43,7 @@ function _enumerationCallback(uid, connectedUid, position, hardwareVersion, firm
     }
 }
 
-async function _getAllDevices() {
-    initialize();
-    var devices = await deviceManager.getAllDevices();
-    return devices;
-}
-
+/* Simplified access to devices using a timeout and no callback function */
 async function initDevices() {
     var devices = [];
 
@@ -66,6 +62,21 @@ async function initDevices() {
         return result;
     };
 
+    // Returns the first device with that uid
+    devices.getDeviceByUid = (uid) => {
+
+        var result;
+
+        devices.forEach((d) => {
+
+            if (d.uid == uid) {
+                result = d;
+            }
+        })
+
+        return result;
+    };
+    
     return new Promise((resolve, reject) => {
         setConnectCallback(callback);
         initialize();
@@ -80,12 +91,15 @@ async function initDevices() {
     }
 }
 
-export { initialize, deviceManager }
-
 window.tf = {}
-window.tf.initialize = initialize;
+
+// For simple access via one function call with await
 window.tf.initDevices = initDevices;
-window.tf.deviceManager = deviceManager;
+
+// To access devices via callback function
+window.tf.initialize = initialize;
 window.tf.setConnectCallback = setConnectCallback;
-//window.tf.devices = _getAllDevices();
+
+// For all cases, get access to the whole manager
+window.tf.deviceManager = deviceManager;
 
