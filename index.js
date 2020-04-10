@@ -48,10 +48,43 @@ async function _getAllDevices() {
     return devices;
 }
 
+async function initDevices() {
+    var devices = [];
+
+    // Returns the first device with that identifier
+    devices.getDeviceByIdentifier = (identifier) => {
+
+        var result;
+
+        devices.forEach((d) => {
+
+            if (d.deviceIdentifier == identifier) {
+                result = d;
+            }
+        })
+
+        return result;
+    };
+
+    return new Promise((resolve, reject) => {
+        setConnectCallback(callback);
+        initialize();
+
+        setTimeout(() => {
+            resolve(devices);
+        }, 500);
+    });
+
+    function callback(device) {
+        devices.push(device);
+    }
+}
+
 export { initialize, deviceManager }
 
-window.tf = {} 
+window.tf = {}
 window.tf.initialize = initialize;
+window.tf.initDevices = initDevices;
 window.tf.deviceManager = deviceManager;
 window.tf.setConnectCallback = setConnectCallback;
 //window.tf.devices = _getAllDevices();
