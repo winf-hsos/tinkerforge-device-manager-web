@@ -44,7 +44,7 @@ function _enumerationCallback(uid, connectedUid, position, hardwareVersion, firm
 }
 
 /* Simplified access to devices using a timeout and no callback function */
-async function initDevices() {
+async function initDevices(finishedCallback = null) {
     var devices = [];
 
     // Returns the first device with that identifier
@@ -82,6 +82,10 @@ async function initDevices() {
         initialize();
 
         setTimeout(() => {
+            // Call optional callback function
+            if(finishedCallback !== null) {
+                finishedCallback(devices);
+            }
             resolve(devices);
         }, 500);
     });

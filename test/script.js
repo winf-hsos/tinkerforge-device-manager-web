@@ -1,19 +1,19 @@
-import * as dm from '../index.js';
-
 var light;
+var devices;
 
-async function run() {
-    var devices = await tf.initDevices();
+tf.initDevices(initDone);
+
+function initDone(connectedDevices) {
+    devices = connectedDevices;
     console.dir(devices);
 
-    light = devices.getDeviceByIdentifier(250);
+    light = devices.getDeviceByIdentifier(259);
     light.registerListener(lightChanged);
-    
+
 }
 
 function lightChanged(val) {
-    let sensorValue = val.getValue("y");
-
+    let sensorValue = val.getValue();
     console.dir(sensorValue);
 }
 
@@ -27,5 +27,5 @@ function errorHandler(err) {
     nfc.scan(nfcRead, errorHandler);
 }
 
-var btn = document.querySelector("button").addEventListener("click", run);
+//var btn = document.querySelector("button").addEventListener("click", run);
 
