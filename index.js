@@ -5,7 +5,7 @@ var ipcon;
 
 /* For getting devices via callback function */
 function initialize(host = "localhost", port = 4280) {
-    console.log("Waiting for devices to connect...");
+    deviceManager.log("Waiting for devices to connect...");
 
     ipcon = new Tinkerforge.IPConnection();
     deviceManager.setIPConnection(ipcon);
@@ -76,14 +76,14 @@ async function initDevices(finishedCallback = null) {
 
         return result;
     };
-    
+
     return new Promise((resolve, reject) => {
         setConnectCallback(callback);
         initialize();
 
         setTimeout(() => {
             // Call optional callback function
-            if(finishedCallback !== null) {
+            if (finishedCallback !== null) {
                 finishedCallback(devices);
             }
             resolve(devices);
@@ -95,7 +95,13 @@ async function initDevices(finishedCallback = null) {
     }
 }
 
+function setLogFunction(logFunction) {
+    deviceManager.setLogFunction(logFunction);
+}
+
 window.tf = {}
+
+window.tf.setLogFunction = setLogFunction;
 
 // For simple access via one function call with await
 window.tf.initDevices = initDevices;
