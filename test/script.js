@@ -1,5 +1,7 @@
 var light;
 var devices;
+var nfc;
+var motionDetector;
 
 tf.initDevices(initDone);
 
@@ -7,9 +9,30 @@ function initDone(connectedDevices) {
     devices = connectedDevices;
     console.dir(devices);
 
+    /*
     light = devices.getDeviceByIdentifier(259);
     light.registerListener(lightChanged);
+    */
 
+    /*
+    nfc = devices.getDeviceByIdentifier(286);
+    nfc.scan(readingDone, readingFailed);
+    */
+
+    oledDisplay = devices.getDeviceByIdentifier(263);
+    oledDisplay.clearDisplay();
+    
+    oledDisplay.write(1,0, "Hallo");
+    oledDisplay.write(5,0, "Hallo");
+
+    motionDetector = devices.getDeviceByIdentifier(292);
+    motionDetector.registerListener(motionDetected);
+
+}
+
+function motionDetected(val) {
+    var motion = val.getValue();
+    console.dir(motion);
 }
 
 function lightChanged(val) {
@@ -17,9 +40,15 @@ function lightChanged(val) {
     console.dir(sensorValue);
 }
 
-function nfcRead(val) {
+function readingDone(val) {
     console.dir(val);
-    setTimeout(() => { nfc.scan(nfcRead, errorHandler); }, 1000);
+    setTimeout(() => { nfc.scan(readingDone, readingFailed); }, 1000);
+}
+
+function readingFailed(error) {
+    console.err(error);
+
+    setTimeout(() => { nfc.scan(readingDone, readingFailed); }, 1000);
 }
 
 function errorHandler(err) {
