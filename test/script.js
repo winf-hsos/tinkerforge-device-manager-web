@@ -19,6 +19,7 @@ function initDone(connectedDevices) {
     nfc.scan(readingDone, readingFailed);
     */
 
+    /*
     oledDisplay = devices.getDeviceByIdentifier(263);
     oledDisplay.clearDisplay();
     
@@ -27,7 +28,16 @@ function initDone(connectedDevices) {
 
     motionDetector = devices.getDeviceByIdentifier(292);
     motionDetector.registerListener(motionDetected);
+    */
 
+    poti = devices.getDeviceByIdentifier(267);
+
+    poti.setPosition(100);
+    poti.registerListener(potiChanged);
+}
+
+function potiChanged(val) {
+    console.dir(val);
 }
 
 function motionDetected(val) {
