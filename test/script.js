@@ -2,6 +2,7 @@ var light;
 var devices;
 var nfc;
 var motionDetector;
+var poti;
 
 tf.initDevices(initDone);
 
@@ -31,7 +32,6 @@ function initDone(connectedDevices) {
     */
 
     poti = devices.getDeviceByIdentifier(267);
-
     poti.setPosition(100);
     poti.registerListener(potiChanged);
 }

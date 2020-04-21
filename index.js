@@ -3,8 +3,21 @@ import { deviceManager } from './lib/deviceManager.js';
 var connectCallback;
 var ipcon;
 
+// Default values for host and port
+var host = "localhost";
+var port = 4280;
+
+
+function setPort(newPort) {
+    port = newPort;
+}
+
+function setHost(newHost) {
+    host = newHost;
+}
+
 /* For getting devices via callback function */
-function initialize(host = "localhost", port = 4280) {
+function initialize() {
     deviceManager.log("Waiting for devices to connect...");
 
     ipcon = new Tinkerforge.IPConnection();
@@ -107,6 +120,8 @@ window.tf.setLogFunction = setLogFunction;
 window.tf.initDevices = initDevices;
 
 // To access devices via callback function
+window.tf.setPort = setPort;
+window.tf.setHost = setHost;
 window.tf.initialize = initialize;
 window.tf.setConnectCallback = setConnectCallback;
 
