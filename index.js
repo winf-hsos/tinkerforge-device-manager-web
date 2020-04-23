@@ -4,7 +4,7 @@ var connectCallback;
 var ipcon;
 
 // Default values for host and port
-var host = "localhost";
+var host = "wss://localhost";
 var port = 4280;
 
 
