@@ -31,9 +31,11 @@ function initDone(connectedDevices) {
     motionDetector.registerListener(motionDetected);
     */
 
+    /*
     poti = devices.getDeviceByIdentifier(267);
     poti.setPosition(100);
     poti.registerListener(potiChanged);
+    */
 }
 
 function potiChanged(val) {
@@ -57,7 +59,6 @@ function readingDone(val) {
 
 function readingFailed(error) {
     console.err(error);
-
     setTimeout(() => { nfc.scan(readingDone, readingFailed); }, 1000);
 }
 
@@ -65,6 +66,3 @@ function errorHandler(err) {
     console.error(err);
     nfc.scan(nfcRead, errorHandler);
 }
-
-//var btn = document.querySelector("button").addEventListener("click", run);
-
