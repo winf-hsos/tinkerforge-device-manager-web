@@ -1,5 +1,16 @@
-# Tinkerforge Device Manager
+# Tinkerforge Device Manager (Web Version)
+
 A web JS library to make connecting to and accessing Tinkerforge devices easier. Created at the University of Applied Sciences in Osnabrueck.
+
+# Usage
+
+You can manually include all necessary libraries to use the TDM in your web project. If you want to do that, copy the 3 lines of code below and paste them right before the closing </body>-tag in your HTML file.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/gh/winf-hsos/tinkerforge-device-manager-web/lib/Tinkerforge.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/winf-hsos/tinkerforge-device-manager-web/index.js" type="module"></script>
+```
 
 # Supported Devices
 Currently supported Tinkerforge devices:

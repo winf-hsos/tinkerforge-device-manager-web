@@ -1,4 +1,5 @@
 import { deviceManager } from './lib/deviceManager.js';
+//import Tinkerforge from 'tinkerforge'
 
 var connectCallback;
 var ipcon;
@@ -111,19 +112,16 @@ function setLogFunction(logFunction) {
     deviceManager.setLogFunction(logFunction);
 }
 
-window.tf = {}
+let tf = {};
+tf.setLogFunction = setLogFunction;
+tf.initDevices = initDevices;
+tf.setPort = setPort;
+tf.initialize = initialize;
+tf.setConnectCallback = setConnectCallback;
+tf.deviceManager = deviceManager;
 
-window.tf.setLogFunction = setLogFunction;
-
-// For simple access via one function call with await
-window.tf.initDevices = initDevices;
-
-// To access devices via callback function
-window.tf.setPort = setPort;
-window.tf.setHost = setHost;
-window.tf.initialize = initialize;
-window.tf.setConnectCallback = setConnectCallback;
-
-// For all cases, get access to the whole manager
-window.tf.deviceManager = deviceManager;
+if (typeof window !== 'undefined') {
+    window.tf = tf;
+    console.log("Successfully loaded Tinkerforge Device Manager V1.0");
+}
 
